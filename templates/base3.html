@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block sidemenu %}
+{% endblock sidemenu %}
+
+{% block body %}
+
+    <div class="row">
+                    <div class="col-lg-2 text-center">
+
+                    </div>
+                    <div class="col-lg-8 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+
+
+                                {% for field, error in form.errors.items %}
+            <ul>
+            <li>{{ error }}</li>
+            </ul>
+        {% empty %}
+
+        {% endfor %}
+        <hr/>
+
+            <form action="{% url soapresponse %}" method="post">
+                {% csrf_token %}
+               {{ form.as_table }}
+
+                <input type="submit" value="Submit" />
+            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 text-center">
+
+                    </div>
+                </div>
+
+<div class="row">
+                    <div class="col-lg-2">
+
+
+                    </div>
+                    <!-- /.col-sm-4 -->
+                    <div class="col-lg-8">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Response</h3>
+                            </div>
+                            <div class="panel-body">
+                                {% for key, value in responsexml.items %}
+                               <li> {{key}} : {{value}}</li>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-4 -->
+                    <div class="col-lg-2">
+
+                    </div>
+
+                </div>
+
+{% endblock body %}

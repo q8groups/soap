@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block sidemenu %}
+{% endblock sidemenu %}
+
+{% block body %}
+
+    <div class="row">
+                    <div class="col-lg-2 text-center">
+
+                    </div>
+                    <div class="col-lg-8 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+
+
+                                {% for field, error in form.errors.items %}
+            <ul>
+            <li>{{ error }} {{ field }}</li>
+            </ul>
+        {% empty %}
+
+        {% endfor %}
+        <hr/>
+
+            <form action="" method="post">
+                {% csrf_token %}
+               {{ form }}
+
+                <input type="submit" value="Submit" />
+            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 text-center">
+
+                    </div>
+                </div>
+
+<div class="row">
+                    <div class="col-lg-2">
+
+
+                    </div>
+                    <!-- /.col-sm-4 -->
+
+    {% if req %}
+                    <div class="col-lg-8">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Response</h3>
+                            </div>
+                            <div class="panel-body">
+                                <pre>
+                                                                    {{ res }}
+
+</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /.col-sm-4 -->
+                    <div class="col-lg-2">
+
+                    </div>
+
+{% endif %}
+{% if res %}
+
+      <!-- /.col-sm-4 -->
+                    <div class="col-lg-8">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Request</h3>
+                            </div>
+                            <div class="panel-body">
+                                <pre>
+                               {{ req }}
+</pre>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-4 -->
+                    <div class="col-lg-2">
+
+                    </div>
+                    </div>
+
+
+{% endif %}
+
+
+
+
+
+{% endblock body %}
+
+{% block javascript %}
+    <script type="text/javascript">
+
+    $( document ).ready(function() {
+        $('#id_name').on('input', function (e) {
+            $("#id_slug").val(URLify($("#id_name").val(), 50));
+        });
+
+    });
+
+
+</script>
+{% endblock javascript %}

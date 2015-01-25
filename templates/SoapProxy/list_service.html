@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+
+
+{% block body %}
+
+    <div class="row">
+    <div class="col-lg-1 text-center">
+
+
+
+
+                    </div>
+
+                   <div class="col-lg-4">
+                    {% if messages %}
+<div class="alert alert-success">
+ {% for message in messages %}
+                    <strong>{{ message }}</strong>
+            {% endfor %}
+
+                </div>
+                        {% endif %}
+                        <h2>{{headline}}</h2>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name </th>
+                                        <th>WSDL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for object in object_list %}
+                                    <tr>
+                                     <td>{{ object.name }}</td>
+                                        <td><a href="{{ object.wsdl }}">WSDL</a></td>
+
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                   {% if is_paginated %}
+    <div class="pagination text-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+                    </div>
+
+                </div>
+
+
+{% endblock body %}
